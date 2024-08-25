@@ -421,10 +421,21 @@ class TTSManager(Observer):
         sampling_rate = model.sampling_rate
         sentences_list = sentence_split(state["text"], state["segment_size"])
 
-        if state["lang"].lower() == "auto":
-            infer_func = model.infer_multilang
-        else:
+        if model.zh_bert_extra:
             infer_func = model.infer
+            state["lang"] = ["zh"]
+        elif model.ja_bert_extra:
+            infer_func = model.infer
+            state["lang"] = ["ja"]
+        elif len(state["lang"]) == 1 and "auto" not in state["lang"]:
+            infer_func = model.infer
+        else:
+            infer_func = model.infer_multilang
+
+        # if state["lang"].lower() == "auto":
+        #     infer_func = model.infer_multilang
+        # else:
+        #     infer_func = model.infer
 
         for sentences in sentences_list:
             state["text"] = sentences

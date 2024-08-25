@@ -7,6 +7,7 @@ import logging
 import os
 
 import torch
+import torch_directml
 from transformers import AutoTokenizer, AutoModelForMaskedLM, BertTokenizer, MegatronBertModel
 
 from contants import config

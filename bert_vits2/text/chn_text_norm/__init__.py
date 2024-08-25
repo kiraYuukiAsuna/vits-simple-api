@@ -1,0 +1,1 @@
+from bert_vits2.text.chn_text_norm import *
